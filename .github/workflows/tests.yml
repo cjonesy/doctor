@@ -1,10 +1,6 @@
-name: Test
+name: Tests
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+on: [push, pull_request]
 
 jobs:
   test:
@@ -17,9 +13,9 @@ jobs:
     - name: Unit Tests
       run: make test-unit
     - name: Lint
-      run: make lint
-    - name: Format
-      run: make fmt
+      run: |
+        go install honnef.co/go/tools/cmd/staticcheck@latest
+        make lint
     - name: Tidy
       run: make go-mod-tidy
     - name: Test Build
