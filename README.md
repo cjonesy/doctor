@@ -1,6 +1,6 @@
 # Doctor
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/cjonesy/doctor)](https://goreportcard.com/report/github.com/cjonesy/doctor) [![Release](https://img.shields.io/github/release/cjonesy/doctor.svg)](https://github.com/cjonesy/doctor/releases/latest)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cjonesy/doctor)](https://goreportcard.com/report/github.com/cjonesy/doctor) [![Release](https://img.shields.io/github/release/cjonesy/doctor.svg)](https://github.com/cjonesy/doctor/releases/latest)[![Tests](https://github.com/cjonesy/doctor/actions/workflows/tests.yml/badge.svg)](https://github.com/cjonesy/doctor/actions/workflows/tests.yml)
 
 ## Introduction
 
