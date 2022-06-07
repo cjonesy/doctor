@@ -1,0 +1,33 @@
+project_name: doctor
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - dir: ./cmd/doctor
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -v
+    ldflags:
+      - -s -w -X github.com/cjonesy/doctor/pkg/doctor/version.Version={{.Version}}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm
+      - arm64
+
+archives:
+  - format: tar.gz
+    files:
+      - none*
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  skip: true

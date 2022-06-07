@@ -1,0 +1,19 @@
+checks:
+  - description: Ensure that go is installed
+    fix: Run `brew install go`
+    type: command-in-path
+    command: go
+  - description: Ensure ssh key exists
+    fix: See https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+    type: file-exists
+    path: ~/.ssh/id_rsa
+  - description: Ensure bashrc has eval statement
+    fix: Run `echo 'eval "$(some_command init bash)"' > ~/.bashrc`
+    type: file-contains
+    path: ~/.bashrc
+    content: eval "$(some_command init bash)"
+  - description: Ensure that terraform is the correct version
+    fix: See https://www.terraform.io/downloads
+    type: output-contains
+    command: terraform --version
+    content: 1.2.2
