@@ -11,7 +11,7 @@ help: ## This help dialog
 	@echo "\nCheck the Makefile to know exactly what each target is doing."
 
 .PHONY: test
-test: fmt staticcheck vet test-unit go-mod-tidy ## Run all tests and linters
+test: lint test-unit go-mod-tidy ## Run all tests and linters
 
 .PHONY: test-unit
 test-unit: ## Run unit tests
@@ -22,17 +22,11 @@ go-mod-tidy: ## Clean go.mod
 	go mod tidy
 	git diff --exit-code go.sum
 
-.PHONY: fmt
-fmt: ## Check formatting
-	test -z "$(shell gofmt -l .)"
-
-.PHONY: staticcheck
-staticcheck: ## Run staticcheck
+.PHONY: lint
+lint: ## Run linters - staticcheck, vet, gofmt
 	staticcheck ./...
-
-.PHONY: vet
-vet: ## Run vet
 	go vet ./...
+	test -z "$(shell gofmt -l .)"
 
 .PHONY: test-release
 test-release: ## Run a test release with goreleaser
@@ -47,7 +41,7 @@ build: clean ## Build the application
 	CGO_ENABLED=0 go build ./cmd/doctor
 
 .PHONY: tag
-tag: ## Create a git tag
+tag: ## Create and push a git tag
 	git tag -a $(TAG) -m "Release $(TAG)"
 	git push origin $(TAG)
 

@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+        go-version-file: 'go.mod'
+    - name: Unit Tests
+      run: make test-unit
+    - name: Lint
+      run: make lint
+    - name: Format
+      run: make fmt
+    - name: Tidy
+      run: make go-mod-tidy
+    - name: Test Build
+      run: make build
+    - name: Run GoReleaser Test
+      uses: goreleaser/goreleaser-action@v3
+      with:
+        args: release --snapshot --skip-publish --rm-dist
