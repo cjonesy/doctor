@@ -13,7 +13,9 @@ jobs:
     - name: Unit Tests
       run: make test-unit
     - name: Lint
-      run: make lint
+      run: |
+        go install "honnef.co/go/tools/cmd/staticcheck"
+        make lint
     - name: Format
       run: make fmt
     - name: Tidy
