@@ -1,7 +1,7 @@
 package check
 
 import (
-	"io/ioutil"
+	"os"
 	"syscall"
 	"testing"
 
@@ -10,12 +10,12 @@ import (
 
 func TestCheckRunBasic(t *testing.T) {
 	// Create a test file
-	f, err := ioutil.TempFile("", "test.file")
+	f, err := os.CreateTemp("", "test.file")
 	if err != nil {
 		panic(err)
 	}
 	defer syscall.Unlink(f.Name())
-	ioutil.WriteFile(f.Name(), []byte(`foo=bar`), 0644)
+	os.WriteFile(f.Name(), []byte(`foo=bar`), 0644)
 
 	testCheckConfig := Check{
 		Description: "This is a basic test",

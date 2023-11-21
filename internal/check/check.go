@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -112,7 +111,7 @@ func (c *Check) checkFileContains() error {
 		return err
 	}
 
-	f, err := ioutil.ReadFile(cleanPath)
+	f, err := os.ReadFile(cleanPath)
 
 	if err != nil {
 		util.PrintFailed()

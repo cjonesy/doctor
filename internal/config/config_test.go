@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"syscall"
 	"testing"
 
@@ -11,7 +11,7 @@ import (
 
 func TestConfigRunBasic(t *testing.T) {
 	// Create a test config
-	f, err := ioutil.TempFile("", ".doctor.yml")
+	f, err := os.CreateTemp("", ".doctor.yml")
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +26,7 @@ checks:
     type: file-exists
 `, f.Name())
 
-	ioutil.WriteFile(f.Name(), []byte(testCfg), 0644)
+	os.WriteFile(f.Name(), []byte(testCfg), 0644)
 
 	testConfig := Config{
 		Path:    f.Name(),

@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -50,7 +49,7 @@ func (c *Config) findConfig() error {
 func (c *Config) parseConfig() error {
 	cleanPath := filepath.Clean(c.Path)
 
-	b, err := ioutil.ReadFile(cleanPath)
+	b, err := os.ReadFile(cleanPath)
 	if err != nil {
 		return err
 	}
