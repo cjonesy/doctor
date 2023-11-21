@@ -21,6 +21,6 @@ jobs:
     - name: Test Build
       run: make build
     - name: Run GoReleaser Test
-      uses: goreleaser/goreleaser-action@v3
+      uses: goreleaser/goreleaser-action@v5
       with:
         args: release --snapshot --skip=publish --clean
