@@ -11,14 +11,13 @@ builds:
     flags:
       - -v
     ldflags:
-      - -s -w -X github.com/cjonesy/doctor/pkg/doctor/version.Version={{.Version}}
+      - -s -w -X github.com/cjonesy/doctor/internal/version.Version={{.Version}}
     goos:
       - darwin
       - linux
       - windows
     goarch:
       - amd64
-      - arm
       - arm64
 
 archives:
