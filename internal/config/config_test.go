@@ -1,15 +1,20 @@
 package config
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"syscall"
 	"testing"
 
+	"github.com/cjonesy/doctor/internal/logger"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestConfigRunBasic(t *testing.T) {
+	ctx := context.Background()
+	log := logger.New(false, false)
+
 	// Create a test config
 	f, err := os.CreateTemp("", ".doctor.yml")
 	if err != nil {
@@ -31,9 +36,10 @@ checks:
 	testConfig := Config{
 		Path:    f.Name(),
 		Verbose: true,
+		Logger:  log,
 	}
 
-	result := testConfig.Run()
+	result := testConfig.Run(ctx)
 
 	assert.NoError(t, result)
 }
